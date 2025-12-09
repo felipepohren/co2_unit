@@ -168,8 +168,8 @@ else:
     st.sidebar.warning("Arquivo 'data.csv' não encontrado no diretório de saída.")
 
 
-
+st.sidebar.write("02 sep 2025 - 08 dec 2025")
 st.sidebar.markdown("---")
 
-st.sidebar.write("02 sep 2025 - 08 dec 2025")
+
 st.sidebar.write("version 1.00")
