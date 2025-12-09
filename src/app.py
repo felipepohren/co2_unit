@@ -26,7 +26,8 @@ if "plot_type" not in st.session_state:
     st.session_state.plot_type = "Split"
 
 # Título da aplicação
-st.title("CO2 Unit Log Visualizer")
+st.title("CO2 Unit Log Visualizer")   
+ 
 
 # Carrega o DataFrame a partir do arquivo pickle
 output_dir = os.path.join(os.getcwd(), "data")
@@ -125,6 +126,12 @@ if st.sidebar.button("Graph generate"):
             plot_df(df_orig, st.session_state.selected_columns, start=st.session_state.start_datetime, end=st.session_state.end_datetime)
         else:
             plot_df_twinx(df_orig, st.session_state.selected_columns, start=st.session_state.start_datetime, end=st.session_state.end_datetime)
+
+else:
+        
+    #desenha imagem planta.png da pasta images
+    image_path = os.path.join(os.getcwd(), "images", "planta.png")  
+    st.image(str(image_path))
 
 st.sidebar.markdown("---")
 
