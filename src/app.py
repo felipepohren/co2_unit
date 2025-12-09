@@ -3,8 +3,8 @@ import pandas as pd
 from datetime import datetime, time
 import os
 import uuid
-from src.main import format_df, export
-from src.viz import plot_df, plot_df_twinx
+#from main import format_df, export
+from viz import plot_df, plot_df_twinx
 
 # Configurações iniciais
 st.set_page_config(page_title="Log Visualizer", layout="wide")
