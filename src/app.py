@@ -61,11 +61,20 @@ columns_list = [
     "Cold room superheat"
 ]
 
-st.session_state.selected_columns = st.sidebar.multiselect(
-    "Select the colums to visualize", 
-    columns_list,
-    default=st.session_state.selected_columns
-)
+# st.session_state.selected_columns = st.sidebar.multiselect(
+#     "Select the colums to visualize", 
+#     columns_list,
+#     default=st.session_state.selected_columns
+    
+# )
+st.sidebar.subheader("Select columns to visualize")
+
+with st.sidebar.container(height=300):
+    selected_columns = []
+    for column in columns_list:
+        if st.checkbox(column, value=column in st.session_state.selected_columns, key=f"checkbox_{column}"):
+            selected_columns.append(column)
+    st.session_state.selected_columns = selected_columns
 
 # --- VALORES PADRÃO ---
 start_datetime_default = pd.to_datetime("2025-12-07 00:00:00")
