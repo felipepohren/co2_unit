@@ -82,7 +82,7 @@ start_date_input = st.sidebar.date_input(
 start_time_input = st.sidebar.time_input(
     "Init time", 
     value=st.session_state.start_datetime.time(),
-    step=600
+    step=300
 )
 
 st.session_state.start_datetime = datetime.combine(start_date_input, start_time_input)
@@ -97,7 +97,7 @@ end_date_input = st.sidebar.date_input(
 end_time_input = st.sidebar.time_input(
     "End time", 
     value=st.session_state.end_datetime.time(),
-    step=600 
+    step=300 
 )
 
 st.session_state.end_datetime = datetime.combine(end_date_input, end_time_input)
