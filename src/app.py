@@ -9,6 +9,15 @@ from viz import plot_df, plot_df_twinx
 # Configurações iniciais
 st.set_page_config(page_title="Log Visualizer", layout="wide")
 
+
+# Carrega o DataFrame a partir do arquivo pickle
+output_dir = os.path.join(os.getcwd(), "data")
+
+if "df_orig" not in st.session_state:
+    st.session_state.df_orig = pd.read_pickle(
+        os.path.join(output_dir, "data.pkl")
+    )
+
 # Inicializa session_state para isolar contexto por usuário
 if "user_id" not in st.session_state:
     st.session_state.user_id = str(uuid.uuid4())
@@ -29,8 +38,6 @@ if "plot_type" not in st.session_state:
 st.title("CO2 Unit Log Visualizer")   
  
 
-# Carrega o DataFrame a partir do arquivo pickle
-output_dir = os.path.join(os.getcwd(), "data")
 
 # Sidebar para seleção de colunas e intervalo de datas
 st.sidebar.header("Configurations")
@@ -91,7 +98,7 @@ start_date_input = st.sidebar.date_input(
 start_time_input = st.sidebar.time_input(
     "Init time", 
     value=st.session_state.start_datetime.time(),
-    step=300
+    step=600
 )
 
 st.session_state.start_datetime = datetime.combine(start_date_input, start_time_input)
@@ -106,7 +113,7 @@ end_date_input = st.sidebar.date_input(
 end_time_input = st.sidebar.time_input(
     "End time", 
     value=st.session_state.end_datetime.time(),
-    step=300 
+    step=600
 )
 
 st.session_state.end_datetime = datetime.combine(end_date_input, end_time_input)
@@ -130,7 +137,8 @@ if st.sidebar.button("Graph generate"):
     if not st.session_state.selected_columns:
         st.warning("⚠️ Please select at least one column to visualize")
     else:
-        df_orig = pd.read_pickle(os.path.join(output_dir, "data.pkl"))
+      #  df_orig = pd.read_pickle(os.path.join(output_dir, "data.pkl"))
+        df_orig = st.session_state.df_orig
         if st.session_state.plot_type == "Split":
             plot_df(df_orig, st.session_state.selected_columns, start=st.session_state.start_datetime, end=st.session_state.end_datetime)
         else:
@@ -184,7 +192,7 @@ else:
     st.sidebar.warning("Arquivo 'data.csv' não encontrado no diretório de saída.")
 
 
-st.sidebar.write("20 sep 2025 - 08 dec 2025")
+st.sidebar.write("20 sep 2025 - 14 dec 2025")
 st.sidebar.markdown("---")
 
 
