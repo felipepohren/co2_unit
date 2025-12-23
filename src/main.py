@@ -86,6 +86,6 @@ if __name__ == "__main__":
             #export(df_formatted, f"{base_name}.csv")
 
             # Guarda o pickle individual
-            df_formatted.to_pickle(
+            df.to_pickle(
                 os.path.join(out_dir, f"{base_name}.pkl")
             )
