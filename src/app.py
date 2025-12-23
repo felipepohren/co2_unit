@@ -14,9 +14,22 @@ st.set_page_config(page_title="Log Visualizer", layout="wide")
 output_dir = os.path.join(os.getcwd(), "data")
 
 if "df_orig" not in st.session_state:
-    st.session_state.df_orig = pd.read_pickle(
-        os.path.join(output_dir, "data.pkl")
-    )
+    # st.session_state.df_orig = pd.read_pickle(
+    #     os.path.join(output_dir, "data.pkl")
+    # )
+    
+    # Lista todos os ficheiros .pkl no diretório
+    pkl_files = [
+        os.path.join(output_dir, f)
+        for f in os.listdir(output_dir)
+        if f.endswith(".pkl")
+    ]
+
+    # Lê todos os DataFrames
+    dfs = [pd.read_pickle(pkl_file) for pkl_file in pkl_files]
+
+    # Une todos num único DataFrame
+    st.session_state.df_orig = pd.concat(dfs, ignore_index=True)
 
 # Inicializa session_state para isolar contexto por usuário
 if "user_id" not in st.session_state:
@@ -189,7 +202,7 @@ if os.path.exists(output_csv_path):
         
 else:
     # Mensagem se o arquivo ainda não foi gerado ou não for encontrado
-    st.sidebar.warning("Arquivo 'data.csv' não encontrado no diretório de saída.")
+    st.sidebar.warning("Download não disponível no momento !!!")
 
 
 st.sidebar.write("20 sep 2025 - 14 dec 2025")
