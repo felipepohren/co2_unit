@@ -205,7 +205,7 @@ else:
     st.sidebar.warning("Download não disponível no momento !!!")
 
 
-st.sidebar.write("20 sep 2025 - 14 dec 2025")
+st.sidebar.write("20 sep 2025 - 29 dec 2025")
 st.sidebar.markdown("---")
 
 
